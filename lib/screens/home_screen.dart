@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/add_new_todo_screen.dart';
+
+import '../classes/todo.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,7 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
-        elevation: 10,
         title: Text(
           'Todo List',
           style: TextStyle(
@@ -25,40 +27,75 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      // drawer: Drawer(),
-      body: ListView.builder(
-        itemCount: todoList.length,
-        itemBuilder: (context, index) {
-          Todo todo = todoList[index];
-          return Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            shadowColor: Colors.grey,
-            child: ListTile(
-              onTap: () {},
-              contentPadding: EdgeInsets.symmetric(horizontal: 20),
-              leading: Icon(
-                Icons.check_box_outline_blank_outlined,
-                color: Colors.black,
-              ),
-              title: Text(todo.title),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      body: todoList.isEmpty
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(todo.description),
-                  Text('Create Date: ${todo.dateCreated}'),
+                  Image.asset('assets/icons/noTasks.png',scale: 6,),
+                  SizedBox(height: 5,),
+                  Text(
+                    'No tasks',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
                 ],
               ),
-              trailing: Text(
-                'Pending',
-                style: TextStyle(color: Colors.orange, fontSize: 14),
-              ),
+            )
+          : ListView.builder(
+              itemCount: todoList.length,
+              itemBuilder: (context, index) {
+                Todo todo = todoList[index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    shadowColor: Colors.grey,
+                    child: Material(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(16),
+                      child: ListTile(
+                        onLongPress: () {
+                          setState(() {
+                            todoList.remove(todo);
+                          });
+                        },
+                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                        leading: Icon(
+                          Icons.check_box_outline_blank_outlined,
+                          color: Colors.black,
+                        ),
+                        title: Text(todo.title),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(todo.description),
+                            Text('Create Date: ${todo.dateCreated}'),
+                          ],
+                        ),
+                        trailing: Text(
+                          'Pending',
+                          style: TextStyle(color: Colors.orange, fontSize: 14),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
-          );
-        },
+      drawer: Drawer(
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                  
+              ],
+            )
+          ],
+        ),
       ),
-      drawer: Drawer(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange.withOpacity(0.7),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
@@ -66,23 +103,43 @@ class _HomeScreenState extends State<HomeScreen> {
           showModalBottomSheet(
             context: context,
             builder: (BuildContext context) {
-              return Container(
+              return SizedBox(
                 width: double.infinity,
-                height: 200,
-                child: Column(children: [
-                  SizedBox(height: 30,),
-                  ListTile(
-                    leading: Icon(Icons.add_task_outlined),
-                    title: Text('Add New Task'),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.incomplete_circle_rounded),
-                    title: Text('Mark as Complete'),
-                    onTap: () {},
-                  ),
-
-                ]),
+                height: 120,
+                child: Column(
+                  children: [
+                    SizedBox(height: 30,),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      alignment: Alignment.centerLeft,
+                      width: double.infinity,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: ListTile(
+                        leading: Image.asset('assets/icons/addNewTask.png',scale: 16,),
+                        title: Text('Add New Task',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500),),
+                        onTap: () async {
+                          Navigator.pop(context);
+                          Todo? todo = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AddNewTodoScreen(),
+                            ),
+                          );
+                          if (todo != null) {
+                            setState(() {
+                              todoList.add(todo);
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           );
@@ -91,17 +148,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
-
-class Todo{
-  final String title;
-  final String description;
-  final DateTime dateCreated;
-  bool isComplete;
-  Todo({
-    required this.title,
-    required this.description,
-    required this.isComplete,
-    required this.dateCreated,
-  });
 }
