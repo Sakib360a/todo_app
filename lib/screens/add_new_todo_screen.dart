@@ -16,7 +16,6 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
         elevation: 10,
         title: Text(
           'Add new task',
@@ -39,7 +38,7 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
               decoration: InputDecoration(
                 label: Text('Task Title'),
                 floatingLabelStyle: TextStyle(
-                  color: Color(0xFFFF9800), // Focused
+                  color: Color(0xFF4a90e2), // Focused
                   fontWeight: FontWeight.w600,
                 ),
                 hintText: 'e.g. Buy groceries',
@@ -55,7 +54,7 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFFFF9800)),
+                  borderSide: BorderSide(color: Color(0xFF4a90e2)),
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
@@ -66,7 +65,7 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
               decoration: InputDecoration(
                 label: Text('Description'),
                 floatingLabelStyle: TextStyle(
-                  color: Color(0xFFFF9800), // Focused
+                  color: Color(0xFF4a90e2), // Focused
                   fontWeight: FontWeight.w600,
                 ),
                 hintText: 'Add more details about this task',
@@ -82,7 +81,7 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFFFF9800)),
+                   borderSide: BorderSide(color: Color(0xFF4a90e2)),
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
@@ -93,8 +92,8 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
               height: 50,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  foregroundColor: Colors.white,
+                  // backgroundColor: Colors.orange,
+                  // foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -114,7 +113,7 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
                       ..clearSnackBars()
                       ..showSnackBar(
                         SnackBar(
-                          backgroundColor: Colors.orange,
+                          //backgroundColor: Colors.orange,
                           behavior: SnackBarBehavior.floating,
                           margin: EdgeInsets.symmetric(
                             horizontal: 10,
