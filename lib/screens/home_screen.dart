@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:todo_app/screens/add_new_todo_screen.dart';
+import 'package:todo_app/screens/settings_screen.dart';
 import 'package:todo_app/zen_focus_theme.dart';
 
 import '../classes/todo.dart';
+import 'about_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -165,8 +167,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       clipBehavior: Clip.antiAlias,
                       color: Color(0xFFe3f2fd),
                       child: ListTile(
-                        onTap: (){},
-                        leading: Image.asset('assets/icons/about.png',scale: 22,),
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutScreen()));
+                        },
+                        leading: Image.asset('assets/icons/about_.png',scale: 22,),
                         title: Text('About',style: TextStyle(fontWeight: FontWeight.w600),),
                         // subtitle: Text('Test'),
                       ),
@@ -175,7 +179,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       clipBehavior: Clip.antiAlias,
                       color: Color(0xFFe3f2fd),
                       child: ListTile(
-                        onTap: (){},
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingsScreen()));
+                        },
                         leading: Image.asset('assets/icons/settings.png',scale: 22,),
                         title: Text('Settings',style: TextStyle(fontWeight: FontWeight.w600),),
                         // subtitle: Text('Test'),
@@ -185,8 +191,51 @@ class _HomeScreenState extends State<HomeScreen> {
                       clipBehavior: Clip.antiAlias,
                       color: Color(0xFFe3f2fd),
                       child: ListTile(
-                        onTap: (){},
-                        leading: Image.asset('assets/icons/logout.png',scale: 22,),
+                        onTap: (){
+                          showDialog(context: context, builder: (context)=>AlertDialog(
+                            title: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/icons/logout.png',scale: 10,),
+                                Text('Logout',style: TextStyle(fontSize: 12),),
+                                SizedBox(height: 30,),
+                                Text('Are you sure ?'),
+                                SizedBox(height: 30,),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SizedBox(
+                                      height: 45,
+                                      width: 100,
+                                      child: ElevatedButton(
+                                          onPressed: (){
+                                            Navigator.pop(context);
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            padding: EdgeInsets.zero,
+                                            backgroundColor: ZenFocusTheme.primary,      // Button background
+                                            foregroundColor: Colors.white,    // Text/Icon color
+                                          ),child: Text('Go back',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),)),
+                                    ),
+                                    SizedBox(
+                                      height: 45,
+                                      width: 100,
+                                      child: ElevatedButton(
+                                          onPressed: (){},
+                                          style: ElevatedButton.styleFrom(
+                                            padding: EdgeInsets.zero,
+                                            backgroundColor: Colors.red,      // Button background
+                                            foregroundColor: Colors.white,    // Text/Icon color
+                                          ),child: Text('Logout',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),)),
+                                    ),
+                                  ],
+                                ),
+
+                              ],
+                            ),
+                          ));
+                        },
+                        leading: Image.asset('assets/icons/logout.png',scale: 15,),
                         title: Text('Logout',style: TextStyle(fontWeight: FontWeight.w600),),
                         // subtitle: Text('Test'),
                       ),
