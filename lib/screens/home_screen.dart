@@ -19,75 +19,72 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
-
-        title: Text(
-          'Todo List',
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        //backgroundColor: Colors.transparent,
+        title: Text('All tasks')
       ),
       body: todoList.isEmpty
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset('assets/icons/no_task.png', scale: 8),
-                  SizedBox(height: 5),
-                  Text(
-                    'No tasks   ',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-            )
-          : ListView.builder(
-              itemCount: todoList.length,
-              itemBuilder: (context, index) {
-                Todo todo = todoList[index];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    shadowColor: Colors.grey,
-                    child: Material(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(16),
-                      child: ListTile(
-                        onLongPress: () {
-                          setState(() {
-                            todoList.remove(todo);
-                          });
-                        },
-                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                        leading: Icon(
-                          Icons.circle_outlined,
-                          color: Colors.black,
-                        ),
-                        title: Text(todo.title),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(todo.description),
-                            Text('Create Date: ${todo.dateCreated}'),
-                          ],
-                        ),
-                        trailing: Text(
-                          'Pending',
-                          style: TextStyle(color: ZenFocusTheme.error, fontSize: 14),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
+               ? Center(
+             child: Column(
+               mainAxisAlignment: MainAxisAlignment.center,
+               crossAxisAlignment: CrossAxisAlignment.center,
+               children: [
+
+                 Image.asset('assets/icons/no-task.png', scale: 5),
+                 // SizedBox(height: 5),
+                 Text(
+                   'No tasks',
+                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                 ),
+               ],
+             ),
+           )
+               : ListView.builder(
+             itemCount: todoList.length,
+             itemBuilder: (context, index) {
+               Todo todo = todoList[index];
+               return Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: Card(
+                   shape: RoundedRectangleBorder(
+                     borderRadius: BorderRadius.circular(16),
+                   ),
+                   clipBehavior: Clip.antiAlias,
+                   shadowColor: Colors.grey,
+                   child: Material(
+                     color: Colors.transparent,
+                     borderRadius: BorderRadius.circular(16),
+                     child: ListTile(
+                       onLongPress: () {
+                         setState(() {
+                           todoList.remove(todo);
+                         });
+                       },
+                       contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                       leading: Icon(
+                         Icons.circle_outlined,
+                         color: Colors.black,
+                       ),
+                       title: Text(todo.title),
+                       subtitle: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           Text(todo.description),
+                           Text('Create Date: ${todo.dateCreated}'),
+                         ],
+                       ),
+                       trailing: Text(
+                         'Pending',
+                         style: TextStyle(color: ZenFocusTheme.error, fontSize: 14),
+                       ),
+                     ),
+                   ),
+                 ),
+               );
+             },
+           ),
+
+
+
       drawer: Drawer(
         backgroundColor: ZenFocusTheme.background ,
         child: Column(
@@ -99,7 +96,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(topRight: Radius.circular(10)),
-                  color: ZenFocusTheme.primary,
+                  //color: ZenFocusTheme.primary,
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF64B5F6),
+                      Color(0xFF0D47A1),
+                    ],
+                    stops: [0, .9],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                  ,
                 ),
                 child: Stack(children: [
                   Center(
@@ -111,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Positioned(
                     top: 140,
                     left: 70,right: 55,
-                    child: Text("Abu Bakkar Sakib",style: TextStyle(color: ZenFocusTheme.textPrimary,
+                    child: Text("Abu Bakkar Sakib",style: TextStyle(color: ZenFocusTheme.background,
                       fontSize: 22,fontWeight: FontWeight.w600,wordSpacing: -2,
                     ),),
                   ),
@@ -120,28 +127,78 @@ class _HomeScreenState extends State<HomeScreen> {
 
               ),
               SizedBox(height: 10,),
-              Card(
-                clipBehavior: Clip.antiAlias,
-
-                child: ListTile(
-                  onTap: (){},
-                  title: Text('All Tasks',),
-                 // subtitle: Text('Test'),
-                ),
-              ),
-              Card(
-                clipBehavior: Clip.antiAlias,
-                child: ListTile(
-                  onTap: (){},
-                  title: Text('Pending Tasks',),
-                 // subtitle: Text('Test'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Column(
+                  children: [
+                    Card(
+                      clipBehavior: Clip.antiAlias,
+                      color: Color(0xFFe3f2fd),
+                      child: ListTile(
+                        onTap: (){},
+                        //contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        leading: Image.asset('assets/icons/all_tasks.png',scale: 20,),
+                        title: Text('All Tasks',style: TextStyle(fontWeight: FontWeight.w500),),
+                        // subtitle: Text('Test'),
+                      ),
+                    ),
+                    Card(
+                      clipBehavior: Clip.antiAlias,
+                       color:  Color(0xFFe3f2fd),
+                      child: ListTile(
+                        onTap: (){},
+                        leading: Image.asset('assets/icons/pending_tasks.png',scale: 20,),
+                        title: Text('Pending Tasks',style: TextStyle(fontWeight: FontWeight.w500),),
+                        // subtitle: Text('Test'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Divider(
+                        color: Colors.lightBlueAccent.withOpacity(0.2),
+                        height: 20,
+                        thickness: 2,
+                        radius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    Card(
+                      clipBehavior: Clip.antiAlias,
+                      color: Color(0xFFe3f2fd),
+                      child: ListTile(
+                        onTap: (){},
+                        leading: Image.asset('assets/icons/about.png',scale: 22,),
+                        title: Text('About',style: TextStyle(fontWeight: FontWeight.w600),),
+                        // subtitle: Text('Test'),
+                      ),
+                    ),
+                    Card(
+                      clipBehavior: Clip.antiAlias,
+                      color: Color(0xFFe3f2fd),
+                      child: ListTile(
+                        onTap: (){},
+                        leading: Image.asset('assets/icons/settings.png',scale: 22,),
+                        title: Text('Settings',style: TextStyle(fontWeight: FontWeight.w600),),
+                        // subtitle: Text('Test'),
+                      ),
+                    ),
+                    Card(
+                      clipBehavior: Clip.antiAlias,
+                      color: Color(0xFFe3f2fd),
+                      child: ListTile(
+                        onTap: (){},
+                        leading: Image.asset('assets/icons/logout.png',scale: 22,),
+                        title: Text('Logout',style: TextStyle(fontWeight: FontWeight.w600),),
+                        // subtitle: Text('Test'),
+                      ),
+                    ),
+                  ],
                 ),
               ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        //backgroundColor: Colors.orange.withOpacity(0.7),
+        backgroundColor: ZenFocusTheme.primary.withOpacity(0.7),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         onPressed: () {
           showModalBottomSheet(

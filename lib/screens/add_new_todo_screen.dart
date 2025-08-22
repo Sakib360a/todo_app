@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/classes/todo.dart';
+import 'package:todo_app/zen_focus_theme.dart';
 
 class AddNewTodoScreen extends StatefulWidget {
   const AddNewTodoScreen({super.key});
@@ -32,7 +33,7 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             TextField(
               controller: _titleTEcontroller,
               decoration: InputDecoration(
@@ -44,7 +45,7 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
                 hintText: 'e.g. Buy groceries',
                 hintStyle: TextStyle(color: Color(0xFF9E9E9E)),
                 filled: true,
-                fillColor: Color(0xFFFDF3E7),
+                fillColor: Color(0xFFe3f2fd),
                 contentPadding: EdgeInsets.symmetric(
                   vertical: 20,
                   horizontal: 20,
@@ -71,7 +72,7 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
                 hintText: 'Add more details about this task',
                 hintStyle: TextStyle(color: Color(0xFF9E9E9E)),
                 filled: true,
-                fillColor: Color(0xFFFDF3E7),
+                fillColor: Color(0xFFe3f2fd),//BBDEFB FDF3E7 e3f2fd
                 contentPadding: EdgeInsets.symmetric(
                   vertical: 20,
                   horizontal: 20,
@@ -92,8 +93,8 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
               height: 50,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  // backgroundColor: Colors.orange,
-                  // foregroundColor: Colors.white,
+                   backgroundColor: ZenFocusTheme.primary.withOpacity(0.8),
+                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
