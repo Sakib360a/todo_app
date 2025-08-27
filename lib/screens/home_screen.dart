@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'package:todo_app/screens/add_new_todo_screen.dart';
 import 'package:todo_app/screens/settings_screen.dart';
 import 'package:todo_app/zen_focus_theme.dart';
