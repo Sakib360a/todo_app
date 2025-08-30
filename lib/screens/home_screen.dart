@@ -246,66 +246,78 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: ZenFocusTheme.primary.withOpacity(0.7),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-        onPressed: () {
-          showModalBottomSheet(
-            backgroundColor: ZenFocusTheme.background,
-            context: context,
-            builder: (BuildContext context) {
-              return SizedBox(
-                width: double.infinity,
-                height: 120,
-                child: Column(
-                  children: [
-                    SizedBox(height: 30),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 16),
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      alignment: Alignment.centerLeft,
-                      width: double.infinity,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        //color: Colors.orange,
-                        color: ZenFocusTheme.primary,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: ListTile(
-                        leading: Image.asset(
-                          'assets/icons/addNewTask.png',
-                          scale: 16,
+      floatingActionButton: SizedBox(
+        height: 60,
+        width: 120,
+        child: FloatingActionButton(
+          backgroundColor: ZenFocusTheme.primary.withOpacity(0.5),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          onPressed: () {
+            showModalBottomSheet(
+              backgroundColor: ZenFocusTheme.background,
+              context: context,
+              builder: (BuildContext context) {
+                return SizedBox(
+                  width: double.infinity,
+                  height: 120,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 30),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 16),
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        alignment: Alignment.centerLeft,
+                        width: double.infinity,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          //color: Colors.orange,
+                          color: ZenFocusTheme.primary,
+                          borderRadius: BorderRadius.circular(16),
                         ),
-                        title: Text(
-                          'Add New Task',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
+                        child: ListTile(
+                          leading: Image.asset(
+                            'assets/icons/addNewTask.png',
+                            scale: 16,
                           ),
-                        ),
-                        onTap: () async {
-                          Navigator.pop(context);
-                          Todo? todo = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AddNewTodoScreen(),
+                          title: Text(
+                            'Add New Task',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
                             ),
-                          );
-                          if (todo != null) {
-                            setState(() {
-                              todoList.add(todo);
-                            });
-                          }
-                        },
+                          ),
+                          onTap: () async {
+                            Navigator.pop(context);
+                            Todo? todo = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddNewTodoScreen(),
+                              ),
+                            );
+                            if (todo != null) {
+                              setState(() {
+                                todoList.add(todo);
+                              });
+                            }
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-        child: Icon(Icons.add, color: Colors.white),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+
+            children: [
+              Image.asset('assets/icons/add_task.png',scale: 17,),
+              const SizedBox(width: 5,),
+              Text('Add task'),
+            ],
+          ),
+        ),
       ),
     );
   }
