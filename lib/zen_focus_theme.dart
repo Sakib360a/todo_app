@@ -16,12 +16,10 @@ class ZenFocusTheme {
       colorScheme: ColorScheme.light(
         primary: primary,
         secondary: secondary,
-        background: background,
         surface: surface,
         error: error,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
-        onBackground: textPrimary,
         onSurface: textPrimary,
         onError: Colors.white,
       ),
