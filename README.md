@@ -1,6 +1,8 @@
 # todo_app
 
 This is a practice project of mine.
+I am trying to design a todo app with good
+ui with good user experience 
 
 ## Getting Started
 
